@@ -3,11 +3,11 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <nav class="site-header sticky-top py-1">
-            <div class="container d-flex flex-column flex-md-row justify-content-between">
-                <a class="py-3" href="/">
+        <nav className="site-header sticky-top py-1">
+            <div className="container d-flex flex-column flex-md-row justify-content-between">
+                <a className="py-3" href="/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="none" stroke="currentColor"
-                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+                        strokeLinecap="round" stroke-linejoin="round" stroke-width="2" className="d-block mx-auto" role="img"
                         viewBox="0 0 70.617 70.617" focusable="false">
                         <title>The Trekking Zone</title>
                         <path d="M70.031,46.254L51.69,27.912c-0.78-0.781-2.047-0.781-2.828,0l-7.281,7.28L28.028,21.639
@@ -17,11 +17,11 @@ const Header = () => {
                     </svg>
                 </a>
 
-                <a class="py-3 d-none d-md-inline-block" href="/">Request Trek</a>
-                <a class="py-3 d-none d-md-inline-block" href="/profile">Hello, username</a>
-                <a class="py-3 d-none d-md-inline-block" href="/logout">Logout</a>
-                <a class="py-3 d-none d-md-inline-block" href="/login">Login</a>
-                <a class="py-3 d-none d-md-inline-block" href="/register">Register</a>
+                <a className="py-3 d-none d-md-inline-block" href="/">Request Trek</a>
+                <a className="py-3 d-none d-md-inline-block" href="/profile">Hello, username</a>
+                <a className="py-3 d-none d-md-inline-block" href="/logout">Logout</a>
+                <a className="py-3 d-none d-md-inline-block" href="/login">Login</a>
+                <a className="py-3 d-none d-md-inline-block" href="/register">Register</a>
             </div>
         </nav>
     )
