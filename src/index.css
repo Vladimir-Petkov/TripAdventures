@@ -3,8 +3,8 @@
   
 }
 body{
-  background-image: url('/images/annapurna-3968913_1920\ \(1\).jpg');
-  background-size: cover;
+  background-image: url("/images/annapurna-3968913_1920\ \(1\).jpg");
+  background-size:cover;
 }
 .container {
   max-width: 960px;
@@ -53,6 +53,12 @@ a{
 }
 
 .overflow-hidden { overflow: hidden; }
+
+footer p{
+   position:relative;
+   float:left;
+}
+
 
 .trek-details{
     display: block;
@@ -286,15 +292,9 @@ transform: translate(-50%, -50%);
   background-color:rgba(255, 255, 255, 0.781);
   max-width:90%;
 }
-
 .footer{
   color: rgba(255, 255, 255, 0.513);
-  clear: both;
-  position: relative;
-  height: 200px;
-  margin-top: 200px;
 }
-
 .no-found-template{
 color: rgba(255, 255, 255, 0.513);
 }
