@@ -1,13 +1,10 @@
 *{
   font-family: cursive;
-  
 }
+
 body{
   background-image: url("/images/annapurna-3968913_1920\ \(1\).jpg");
   background-size:cover;
-}
-.container {
-  max-width: 960px;
 }
 
 a{
@@ -19,6 +16,7 @@ a{
   padding:10px;
   transition: ease-in-out color .15s;
 }
+
 .a-button:hover{
   color: rgb(78, 58, 2);
   text-decoration: none;
@@ -53,12 +51,6 @@ a{
 }
 
 .overflow-hidden { overflow: hidden; }
-
-footer p{
-   position:relative;
-   float:left;
-}
-
 
 .trek-details{
     display: block;
@@ -194,12 +186,12 @@ margin-bottom: 2%;
 
 .treksPlaceholder{
   background-color:rgba(255, 255, 255, 0.849);
-flex: 0 1 30%;
-margin: 2%;
-max-width:25%;
-border:solid;
-border-color:rgb(241, 179, 6);
-box-shadow:0 0 1.5rem 0 rgba(0, 0, 0, 0.712);
+  flex: 0 1 30%;
+  margin: 2%;
+  max-width:25%;
+  border:solid;
+  border-color:rgb(241, 179, 6);
+  box-shadow:0 0 1.5rem 0 rgba(0, 0, 0, 0.712);
 }
 
 #treks-list{
@@ -221,19 +213,19 @@ box-shadow:0 0 1.5rem 0 rgba(0, 0, 0, 0.712);
 
 
 .img:before {
-display: block;
-content: '';
-padding-top: 100%;
+  display: block;
+  content: '';
+  padding-top: 100%;
 }
 
 img {
-display: block;
-width:100%;
-height: auto;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
+  display: block;
+  width:100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
 }
 
@@ -294,7 +286,10 @@ transform: translate(-50%, -50%);
 }
 .footer{
   color: rgba(255, 255, 255, 0.513);
+  position: absolute;
+  bottom: 0;
+  height: 2.5rem;
 }
 .no-found-template{
-color: rgba(255, 255, 255, 0.513);
+  color: rgba(255, 255, 255, 0.513);
 }
