@@ -21,9 +21,6 @@ a{
   color: rgb(78, 58, 2);
   text-decoration: none;
 }
-/*
- * Custom translucent site header
- */
 
 .site-header {
   background-color: rgba(27, 27, 27, 0.904);
@@ -43,12 +40,6 @@ a{
   -ms-flex: 1;
   flex: 1;
 }
-@media (min-width: 768px) {
-  .flex-md-equal > * {
-    -ms-flex: 1;
-    flex: 1;
-  }
-}
 
 .overflow-hidden { overflow: hidden; }
 
@@ -60,7 +51,7 @@ a{
     text-align: center;      
     border-radius: 15px;    
     font-size: 18px;
-    /* padding: 0.5rem 0;   */
+    padding: 0.5rem 0;  
     font-weight: bold;
 }
 .card-image{
@@ -172,19 +163,16 @@ form label{
   color: rgb(248, 184, 8);
 }
 
-/* ------------------------------------------------------------------------------------------------------------------------ */
-
-#successBox, #loadingBox, #errorBox{
-display: none;
-
-margin-bottom: 2%;
+#successBox, #loadingBox, #errorBox {
+  display: none;
+  margin-bottom: 2%;
 }
 
-nav{
-margin-bottom: 2%;
+nav {
+  margin-bottom: 2%;
 }
 
-.treksPlaceholder{
+.treksPlaceholder {
   background-color:rgba(255, 255, 255, 0.849);
   flex: 0 1 30%;
   margin: 2%;
@@ -194,14 +182,14 @@ margin-bottom: 2%;
   box-shadow:0 0 1.5rem 0 rgba(0, 0, 0, 0.712);
 }
 
-#treks-list{
+#treks-list {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
-.img{
+.img {
   display: block;
   position: relative;
   overflow: hidden;
@@ -227,13 +215,6 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
 
-}
-
-@media screen and (max-width:900px){
-.treksPlaceholder{
-  flex: 0 1 80%;
- 
-}
 }
 
 .profile-img{
@@ -284,11 +265,11 @@ img {
   background-color:rgba(255, 255, 255, 0.781);
   max-width:90%;
 }
-.footer{
+.footer {
   color: rgba(255, 255, 255, 0.513);
   position: absolute;
   bottom: 0;
-  height: 2.5rem;
+  padding-top: 15px;
 }
 .no-found-template{
   color: rgba(255, 255, 255, 0.513);
