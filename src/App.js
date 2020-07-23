@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Home from './Components/Home/Home';
+import Register from './Components/Users/Register/Register';
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,6 +16,7 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/register" component={Register} />
         </Switch>
         <Footer />
       </Router>
