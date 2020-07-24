@@ -55,14 +55,26 @@ class Register extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const { username, password, usernameError, passwordError, rePasswordError } = this.state;
-        
-        if (usernameError || passwordError || rePasswordError) {
-            console.log('error')
-            return
-        } 
 
-        console.log(username);
-        console.log(password);
+        if (usernameError || passwordError || rePasswordError) {
+            return
+        }
+
+        const data = {
+            username,
+            password
+        }
+
+        fetch(`http://localhost:9999/api/user/register`, {
+            body: JSON.stringify(data),
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(() => {
+                this.props.history.push('/login');
+            })
     };
 
     render() {
@@ -87,13 +99,13 @@ class Register extends Component {
             </div>
 
             <div className="form-label-group">
-            {passwordError ? <div style={mystyle} >Password must be between 5 and 16 characters long</div> : null}
+                {passwordError ? <div style={mystyle} >Password must be between 5 and 16 characters long</div> : null}
                 <label htmlFor="inputPassword">Password</label>
                 <input type="password" value={password} onChange={(e) => this.onChange(e, 'password')} onBlur={this.handlePasswordBlur} className="form-control" required />
             </div>
 
             <div className="form-label-group">
-            {rePasswordError ? <div style={mystyle} >Repeat Password does not match password!</div> : null}
+                {rePasswordError ? <div style={mystyle} >Repeat Password does not match password!</div> : null}
                 <label htmlFor="inputRePassword">Re-Password</label>
                 <input type="password" value={rePassword} onChange={(e) => this.onChange(e, 'rePassword')} onBlur={this.handleRepasswordBlur} className="form-control" required />
             </div>
