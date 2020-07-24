@@ -8,7 +8,7 @@ const Header = () => {
             <div className="container d-flex flex-column flex-md-row justify-content-between">
                 <Link className="py-3" to="/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="none" stroke="currentColor"
-                        strokeLinecap="round" stroke-linejoin="round" stroke-width="2" className="d-block mx-auto" role="img"
+                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="d-block mx-auto" role="img"
                         viewBox="0 0 70.617 70.617" focusable="false">
                         <title>TripAdventures</title>
                         <path d="M70.031,46.254L51.69,27.912c-0.78-0.781-2.047-0.781-2.828,0l-7.281,7.28L28.028,21.639
