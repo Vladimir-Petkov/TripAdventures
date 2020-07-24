@@ -45,12 +45,28 @@ class Login extends Component {
         const { username, password, usernameError, passwordError } = this.state;
 
         if (usernameError || passwordError) {
-            console.log('error')
             return
         }
 
-        console.log(username);
-        console.log(password);
+        const data = {
+            username,
+            password
+        }
+
+        fetch(`http://localhost:9999/api/user/login`, {
+            body: JSON.stringify(data),
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+        }).then(res => res.json())
+            .then((data) => {
+                localStorage.setItem("username", data.username);
+                localStorage.setItem("authtoken", data.token);
+                localStorage.setItem("userId", data.id);
+
+                this.props.history.push('/');
+            })
     };
 
     render() {
