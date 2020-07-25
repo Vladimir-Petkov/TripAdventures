@@ -2,38 +2,19 @@ import React, { Component } from 'react';
 // import 'Header.module.css';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import UserContext from '../../Context';
 
 class Header extends Component {
-    constructor() {
-        super()
 
-        this.state = {
-            isLoggedIn: '',
-            username: ''
-        }
-    }
-
-    componentDidMount() {
-        const isLoggedIn = localStorage.getItem("authtoken") || null;
-        const username = localStorage.getItem("username") || null;
-
-        this.setState({
-            isLoggedIn, username
-        })
-    };
+    static contextType = UserContext;
 
     logout = () => {
-        fetch(`http://localhost:9999/api/user/logout`, {
-            method: 'POST',
-        }).then(res => res.text())
-            .then(() => {
-                localStorage.clear();
-                this.props.history.push('/login');
-            })
+        this.context.logOut();
+        this.props.history.push('/');
     };
 
     render() {
-        const { isLoggedIn, username } = this.state;
+        const { loggedIn, user } = this.context;
 
         return <nav className="site-header sticky-top py-1">
             <div className="container d-flex flex-column flex-md-row justify-content-between">
@@ -49,11 +30,11 @@ class Header extends Component {
                     </svg>
                 </Link>
 
-                {isLoggedIn && <Link className="py-3 d-none d-md-inline-block" to="/">Create Trip</Link>}
-                {isLoggedIn && <Link className="py-3 d-none d-md-inline-block" to="/profile">Hello, {username}</Link>}
-                {isLoggedIn && <Link className="py-3 d-none d-md-inline-block" to="/logout" onClick={this.logout}>Logout</Link>}
-                {!isLoggedIn && <Link className="py-3 d-none d-md-inline-block" to="/login">Login</Link>}
-                {!isLoggedIn && <Link className="py-3 d-none d-md-inline-block" to="/register" >Register</Link>}
+                {loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/create">Create Trip</Link>}
+                {loggedIn && <Link className="py-3 d-none d-md-inline-block" to={`/profile/${user.id}`}>Hello, {user.username}</Link>}
+                {loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/logout" onClick={this.logout}>Logout</Link>}
+                {!loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/login">Login</Link>}
+                {!loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/register" >Register</Link>}
             </div>
         </nav>
     }

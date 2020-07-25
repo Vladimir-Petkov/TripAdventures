@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import requester from '../../Helpers/requester';
+import UserContext from '../../../Context';
 
 class Login extends Component {
     constructor() {
@@ -12,6 +14,8 @@ class Login extends Component {
             passwordError: false,
         };
     };
+
+    static contextType = UserContext;
 
     onChange = (event, type) => {
         const newState = {};
@@ -40,7 +44,7 @@ class Login extends Component {
         }
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
         const { username, password, usernameError, passwordError } = this.state;
 
@@ -48,25 +52,16 @@ class Login extends Component {
             return
         }
 
-        const data = {
-            username,
-            password
-        }
-
-        fetch(`http://localhost:9999/api/user/login`, {
-            body: JSON.stringify(data),
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-        }).then(res => res.json())
-            .then((data) => {
-                localStorage.setItem("username", data.username);
-                localStorage.setItem("authtoken", data.token);
-                localStorage.setItem("userId", data.id);
-
+        await requester('http://localhost:9999/api/user/login', {
+                username,
+                password
+            }, (user) => {
+                this.context.logIn(user);
                 this.props.history.push('/');
-            })
+            }, (e) => {
+                console.log('Error', e);
+            }
+        )
     };
 
     render() {
