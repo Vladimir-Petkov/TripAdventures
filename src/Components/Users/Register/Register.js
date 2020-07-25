@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import requester from '../../Helpers/requester';
+import UserContext from '../../../Context';
 
 class Register extends Component {
     constructor() {
@@ -14,6 +16,7 @@ class Register extends Component {
             rePasswordError: false
         };
     };
+    static contextType = UserContext;
 
     onChange = (event, type) => {
         const newState = {};
@@ -52,29 +55,24 @@ class Register extends Component {
         }
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
         const { username, password, usernameError, passwordError, rePasswordError } = this.state;
 
         if (usernameError || passwordError || rePasswordError) {
             return
         }
-
-        const data = {
+    
+        await requester('http://localhost:9999/api/user/register', {
             username,
             password
-        }
-
-        fetch(`http://localhost:9999/api/user/register`, {
-            body: JSON.stringify(data),
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(() => {
-                this.props.history.push('/login');
-            })
+          }, (user) => {
+            this.context.logIn(user);
+            this.props.history.push('/');
+          }, (e) => {
+            console.log('Error', e);
+          }
+        )
     };
 
     render() {
