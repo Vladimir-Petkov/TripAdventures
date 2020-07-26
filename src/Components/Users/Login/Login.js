@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import requester from '../../Helpers/requester';
+import requester from '../../Helpers/userService';
 import UserContext from '../../../Context';
 
 class Login extends Component {

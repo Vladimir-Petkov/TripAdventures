@@ -31,7 +31,6 @@ class AuthHelper extends Component {
         const token = getCookie('x-auth-token');
 
         if (!token) {
-            console.log('IN');
             this.logOut()
             return
         };

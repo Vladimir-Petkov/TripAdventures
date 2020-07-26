@@ -5,6 +5,8 @@ import Home from './Components/Home/Home';
 import Register from './Components/Users/Register/Register';
 import Login from './Components/Users/Login/Login';
 import Profile from './Components/Users/Profile/Profile';
+import CreateTrip from './Components/Trips/Create/Create';
+import EditTrip from './Components/Trips/Edit/Edit';
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,6 +23,8 @@ const App = () => {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/profile/:userid" component={Profile} />
+          <Route path="/create" component={CreateTrip} />
+          <Route path="/edit" component={EditTrip} />
         </Switch>
         <Footer />
       </Router>

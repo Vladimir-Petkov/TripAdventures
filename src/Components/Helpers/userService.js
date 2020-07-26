@@ -1,4 +1,4 @@
-const requester = async (url, body, onSuccess, onFailure) => {
+const userService = async (url, body, onSuccess, onFailure) => {
     try {
         const promise = await fetch(url, {
             body: JSON.stringify(body),
@@ -26,4 +26,4 @@ const requester = async (url, body, onSuccess, onFailure) => {
     }
 };
 
-export default requester;
+export default userService;
