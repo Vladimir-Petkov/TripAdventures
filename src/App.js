@@ -4,6 +4,7 @@ import Footer from './Components/Footer/Footer';
 import Home from './Components/Home/Home';
 import Register from './Components/Users/Register/Register';
 import Login from './Components/Users/Login/Login';
+import Profile from './Components/Users/Profile/Profile';
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/profile/:userid" component={Profile} />
         </Switch>
         <Footer />
       </Router>
