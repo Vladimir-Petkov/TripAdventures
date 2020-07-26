@@ -6,6 +6,8 @@ class Home extends Component {
     static contextType = UserContext;
 
     render() {
+        console.log(this.context);
+
         
         return (
             <div className="home d-md-flex flex-md-equal  my-md-3 pl-md-3" >

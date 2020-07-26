@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import requester from '../../Helpers/requester';
+import userService from '../../Helpers/userService';
 import UserContext from '../../../Context';
 
 class Register extends Component {
@@ -63,11 +63,12 @@ class Register extends Component {
             return
         }
     
-        await requester('http://localhost:9999/api/user/register', {
+        await userService('http://localhost:9999/api/user/register', {
             username,
             password
           }, (user) => {
             this.context.logIn(user);
+            console.log(user);
             this.props.history.push('/');
           }, (e) => {
             console.log('Error', e);
