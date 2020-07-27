@@ -36,11 +36,6 @@ a{
   text-decoration: none;
 }
 
-.flex-equal > * {
-  -ms-flex: 1;
-  flex: 1;
-}
-
 .overflow-hidden { overflow: hidden; }
 
 .trek-details{
@@ -55,7 +50,9 @@ a{
     font-weight: bold;
 }
 .card-image{
-  max-height: 50%;
+  max-height: 60%;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 .card-text{
   top:10px;
@@ -120,12 +117,10 @@ form label{
 }
 
 #fouronefour{
-   margin: 0 auto;
-   width: 100%;
-   margin-bottom: 2%;
-   border:solid;
-   border-color: rgba(27, 27, 27, 0.904);
-   box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.76);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .alert{
@@ -245,9 +240,7 @@ img {
   top:0;
   left:0;
   transform: none;
-  width: 100%;
   position: static;
-  margin: 0 auto;
 }
 
 .create-trek{
@@ -266,10 +259,10 @@ img {
 }
 .footer {
   color: rgba(255, 255, 255, 0.513);
-  position: absolute;
   bottom: 0;
   padding-top: 15px;
+  position: fixed;
 }
 .no-found-template{
-  color: rgba(255, 255, 255, 0.513);
+  color:whitesmoke;
 }
