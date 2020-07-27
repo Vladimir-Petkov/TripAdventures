@@ -36,7 +36,7 @@ class CreateTrip extends Component {
     handleDescriptionBlur = () => {
         const { description } = this.state;
 
-        if (description.length < 10 || description.length > 120) {
+        if (description.length < 10 || description.length > 150) {
             this.setState({ descriptionError: true });
         } else {
             this.setState({ descriptionError: false });
@@ -112,7 +112,7 @@ class CreateTrip extends Component {
             </div>
 
             <div className="form-label-group">
-                {descriptionError ? <div style={mystyle} >Description must be between 10 and 120 characters long</div> : null}
+                {descriptionError ? <div style={mystyle} >Description must be between 10 and 150 characters long</div> : null}
                 <label htmlFor="inputTrekDescription">Description</label>
                 <textarea type="text" value={description} onChange={(e) => this.onChange(e, 'description')}
                     onBlur={this.handleDescriptionBlur} className="form-control" required></textarea>
