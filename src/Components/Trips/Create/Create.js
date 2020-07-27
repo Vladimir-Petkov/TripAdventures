@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
 
 class CreateTrip extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             location: '',
