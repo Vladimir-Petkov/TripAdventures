@@ -10,7 +10,6 @@ class Header extends Component {
 
     logout = () => {
         this.context.logOut();
-        this.props.history.push('/');
     };
 
     render() {
@@ -32,7 +31,7 @@ class Header extends Component {
 
                 {loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/create">Create Trip</Link>}
                 {loggedIn && <Link className="py-3 d-none d-md-inline-block" to={`/profile/${user.id}`}>Hello, {user.username}</Link>}
-                {loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/logout" onClick={this.logout}>Logout</Link>}
+                {loggedIn && <a className="py-3 d-none d-md-inline-block" href="/" onClick={this.logout}>Logout</a>}
                 {!loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/login">Login</Link>}
                 {!loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/register" >Register</Link>}
             </div>

@@ -21,7 +21,7 @@ class AuthPageWithTrips extends Component {
         });
     };
 
-    renderOrigamis() {
+    renderTrips() {
         const { trips } = this.state;
 
         return trips.map((trip, index) => {
@@ -46,8 +46,8 @@ class AuthPageWithTrips extends Component {
                     haveTrips: true
                 });
             }
-        } else {
-            if (trips.length === 0) {
+        } else if (trips.length === 0) {
+            if (haveTrips) {
                 this.setState({
                     haveTrips: false
                 });
@@ -62,7 +62,7 @@ class AuthPageWithTrips extends Component {
 
         return <Fragment >
             {haveTrips ? <div id="treks-list">
-                {this.renderOrigamis()}
+                {this.renderTrips()}
             </div> : <AuthPageNoTrips />}
         </Fragment>
     };

@@ -5,12 +5,16 @@ class Profile extends Component {
         super(props);
 
         this.state = {
-            username: null
+            username: null,
+            myTrips: [],
+            myTripsLength: 0
         };
     };
 
     componentDidMount() {
         this.getUser(this.props.match.params.userid);
+        this.myTrips(this.props.match.params.userid);
+        this.renderTrips();
     };
 
     getUser = async (id) => {
@@ -21,15 +25,50 @@ class Profile extends Component {
         };
 
         const user = await response.json();
-        
+
         this.setState({
             username: user.username
         });
     };
 
+    myTrips = async (id) => {
+        const response = await fetch(`http://localhost:9999/api/trips`);
+
+        if (!response.ok) {
+            this.props.history.push('/')
+        };
+
+        const trips = await response.json();
+
+        const tipArr = [];
+
+        trips.map((t) => {
+            if (id === t.creatorId) {
+                tipArr.push(t);
+            } else {
+                return null
+            }
+            return t;
+        });
+
+        this.setState({
+            myTrips: tipArr,
+            myTripsLength: tipArr.length
+        });
+    };
+
+    renderTrips() {
+        const { myTrips } = this.state;
+
+        return myTrips.map((trip) => {
+            return <p key={trip._id} >{trip.location}</p>
+        });
+    };
+
     render() {
         const {
-            username
+            username,
+            myTripsLength
         } = this.state;
 
         if (username === null) {
@@ -42,10 +81,9 @@ class Profile extends Component {
             <img className="profile-img" src="/images/user.png" alt='' />
             <div className="profile-info">
                 <p>Username: <small>{username}</small></p>
-                <p className="infoType">Wished 0 treks =)</p>
-                <p>Everest Base Camp</p>
-                <p>Langtang and Gosainkund</p>
-                <p>No treks</p>
+                <p className="infoType">Wished {myTripsLength} Trips</p>
+
+                {this.renderTrips()}
             </div>
         </div>
     }
