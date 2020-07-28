@@ -28,10 +28,10 @@ const trippsShema = new mongoose.Schema({
         required: true
     },
 
-    creatorId: [{
+    creatorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }],
+    },
 
     usernameCreator: {
         type: mongoose.Schema.Types.String,
