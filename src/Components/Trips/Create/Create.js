@@ -10,6 +10,7 @@ class CreateTrip extends Component {
             date: '',
             description: '',
             image: '',
+            likes: 0,
             locationError: false,
             descriptionError: false,
             imageError: false
@@ -36,7 +37,7 @@ class CreateTrip extends Component {
     handleDescriptionBlur = () => {
         const { description } = this.state;
 
-        if (description.length < 10 || description.length > 150) {
+        if (description.length < 10 || description.length > 400) {
             this.setState({ descriptionError: true });
         } else {
             this.setState({ descriptionError: false });
@@ -55,7 +56,7 @@ class CreateTrip extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        const { location, date, description, image, locationError, descriptionError, imageError } = this.state;
+        const { location, date, description, image, likes, locationError, descriptionError, imageError } = this.state;
 
         if (locationError || descriptionError || imageError) {
             return
@@ -68,6 +69,7 @@ class CreateTrip extends Component {
             date,
             description,
             image,
+            likes,
             token
         };
 
@@ -112,7 +114,7 @@ class CreateTrip extends Component {
             </div>
 
             <div className="form-label-group">
-                {descriptionError ? <div style={mystyle} >Description must be between 10 and 150 characters long</div> : null}
+                {descriptionError ? <div style={mystyle} >Description must be between 10 and 400 characters long</div> : null}
                 <label htmlFor="inputTrekDescription">Description</label>
                 <textarea type="text" value={description} onChange={(e) => this.onChange(e, 'description')}
                     onBlur={this.handleDescriptionBlur} className="form-control" required></textarea>

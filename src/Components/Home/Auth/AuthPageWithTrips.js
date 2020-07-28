@@ -8,7 +8,8 @@ class AuthPageWithTrips extends Component {
         super(props);
 
         this.state = {
-            trips: []
+            trips: [],
+            haveTrips: false
         };
     };
 
@@ -34,11 +35,33 @@ class AuthPageWithTrips extends Component {
         this.getTrips();
     };
 
+    componentDidUpdate() {
+        const { trips, haveTrips } = this.state;
+
+        if (trips.length > 0) {
+            if (haveTrips) {
+                return
+            } else {
+                this.setState({
+                    haveTrips: true
+                });
+            }
+        } else {
+            if (trips.length === 0) {
+                this.setState({
+                    haveTrips: false
+                });
+            } else {
+                return
+            }
+        }
+    };
+
     render() {
-        const { trips } = this.state;
+        const { haveTrips } = this.state;
 
         return <Fragment >
-            {trips ? <div id="treks-list">
+            {haveTrips ? <div id="treks-list">
                 {this.renderOrigamis()}
             </div> : <AuthPageNoTrips />}
         </Fragment>

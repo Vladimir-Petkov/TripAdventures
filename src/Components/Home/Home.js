@@ -10,8 +10,7 @@ class Home extends Component {
 
         this.state = {
             loggedIn: false,
-            user: null,
-            trips: {}
+            user: null
         };
     };
     static contextType = UserContext;

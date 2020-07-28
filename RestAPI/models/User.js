@@ -4,23 +4,19 @@ const saltRounds = 10;
 
 const Schema = mongoose.Schema;
 const Model = mongoose.model;
-const { String, ObjectId } = Schema.Types;
 
 const userSchema = new Schema({
 
     username: {
-        type: String,
+        type: mongoose.Schema.Types.String,
         unique: true,
         required: true
     },
 
     password: {
-        type: String,
+        type: mongoose.Schema.Types.String,
         require: true
     },
-
-    trips: [{ type: ObjectId, ref: "Trips" }]
-
 });
 
 userSchema.methods = {

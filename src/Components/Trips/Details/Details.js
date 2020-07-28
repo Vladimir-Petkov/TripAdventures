@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
+import { Link } from 'react-router-dom';
+import UserContext from '../../../Context';
 
 class DetailsTrip extends Component {
     constructor(props) {
@@ -10,12 +12,46 @@ class DetailsTrip extends Component {
             date: '',
             description: '',
             image: '',
-            creator: ''
+            tripId: '',
+            creatorId: '',
+            usernameCreator: '',
+            currentUser: '',
+            isCreator: false,
         };
     };
 
+    static contextType = UserContext;
+
     componentDidMount() {
+        const { user } = this.context;
+
+        this.setState({
+            currentUser: user
+        });
+
         this.getTrip();
+    };
+
+    componentDidUpdate() {
+        const { creatorId, currentUser, isCreator } = this.state;
+
+        if (creatorId === currentUser.id) {
+            if (isCreator) {
+                return;
+            } else {
+                this.setState({
+                    isCreator: true
+                });
+            };
+        } else if (creatorId !== currentUser.id) {
+            if (isCreator) {
+                this.setState({
+                    isCreator: false
+                });
+            } else {
+                return;
+            }
+        }
     };
 
     getTrip = async () => {
@@ -35,36 +71,42 @@ class DetailsTrip extends Component {
             body: JSON.stringify(data),
         }).then(res => res.json())
             .then((trip) => {
+                console.log(trip);
                 this.setState({
                     location: trip.location,
                     date: trip.date,
                     description: trip.description,
                     image: trip.image,
-                    creator: trip.creator
+                    likes: trip.likes,
+                    tripId: trip._id,
+                    usernameCreator: trip.usernameCreator,
+                    creatorId: trip.creatorId[0]
                 })
             });
     };
 
     render() {
-        const { location, date, description, image, creator } = this.state;
+        const { location, date, description, image, tripId, isCreator, usernameCreator, likes } = this.state;
 
-        return <div className="row single-trek-details text-center">
+        return <div className="single-trek-details text-center">
             <div className="col-md-12 text-center overflow-hidden">
+                <br />
                 <img className="details-img"
                     src={image} alt="" />
-                <div className="overflow-hidden my-3 p-3">
+                <div className="overflow-hidden">
                     <h2 className="display-5">{location}</h2>
                     <p className="infoType">Description:</p>
                     <p className="trek-description">{description}</p>
-                    <p className="infoType">Date: <large>{date}</large>
+                    <p className="infoType">Date: <span>{date}</span>
                     </p>
-                    <p className="infoType">Likes: <large>0</large>
+                    <p className="infoType">Likes: <span>{likes}</span>
                     </p>
-                    <p className="infoType">Organizer: <large>{creator}</large>
+                    <p className="infoType">Organizer: <span>{usernameCreator}</span>
                     </p>
                 </div>
-                <div className="buttons-together">
-                    <a className="a-button" href="/">
+
+                {isCreator ? <div className="buttons-together">
+                    <Link className="a-button" to={`/edit/${tripId}`}>
                         <svg version="1.1" id="edit-button" width="30px" xmlns="http://www.w3.org/2000/svg"
                             x="0px" y="0px" viewBox="0 0 293.129 293.129"
                         >
@@ -84,9 +126,9 @@ class DetailsTrip extends Component {
                 L179.795,155.597z" />
 
                         </svg>
-                  Edit the trek
-                </a>
-                    <a className="a-button" href="/">
+                  Edit the trip
+                </Link>
+                    <Link className="a-button" to="/">
                         <svg version="1.1" width="30px" id="remove-button" xmlns="http://www.w3.org/2000/svg"
                             x="0px" y="0px" viewBox="0 0 507.2 507.2"
                         >
@@ -100,9 +142,9 @@ class DetailsTrip extends Component {
                             <path d="M309.6,133.6c11.2-11.2,30.4-11.2,41.6,0l23.2,23.2c11.2,11.2,11.2,30.4,0,41.6L197.6,373.6
             c-11.2,11.2-30.4,11.2-41.6,0l-22.4-22.4c-11.2-11.2-11.2-30.4,0-41.6L309.6,133.6z" />
                         </svg>
-                  Close the trek
-                </a>
-                    <a className="a-button" href="/">
+                  Delete the trip
+                </Link>
+                </div > : <Link className="a-button" to="/">
                         <svg version="1.1" width="30px" id="like-button" xmlns="http://www.w3.org/2000/svg"
                             x="0px" y="0px" viewBox="0 0 50 50"
                         >
@@ -112,8 +154,7 @@ class DetailsTrip extends Component {
                             <path d="M6,18.078c-0.553,0-1-0.447-1-1c0-5.514,4.486-10,10-10c0.553,0,1,0.447,1,1s-0.447,1-1,1
                c-4.411,0-8,3.589-8,8C7,17.631,6.553,18.078,6,18.078z" />
                         </svg>
-                  Like</a>
-                </div >
+                  Like trip</Link>}
             </div >
         </div >
     }

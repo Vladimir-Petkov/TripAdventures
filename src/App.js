@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/profile/:userid" component={Profile} />
           <Route path="/create" component={CreateTrip} />
-          <Route path="/edit" component={EditTrip} />
+          <Route path="/edit/:id" component={EditTrip} />
           <Route path="/details/:id" component={DetailsTrip} />
         </Switch>
         <Footer />

@@ -68,7 +68,6 @@ class Register extends Component {
             password
           }, (user) => {
             this.context.logIn(user);
-            console.log(user);
             this.props.history.push('/');
           }, (e) => {
             console.log('Error', e);

@@ -58,7 +58,7 @@ class EditTrip extends Component {
     };
 
     getTrip = async () => {
-        const id = "5f1dcb7bbbd88e302cf93a7f";
+        const id = this.props.match.params.id;
         const token = getCookie('x-auth-token');
 
         const data = {
@@ -91,8 +91,8 @@ class EditTrip extends Component {
             return
         };
 
+        const id = this.props.match.params.id;
         const token = getCookie('x-auth-token');
-        const id = "5f1dcb7bbbd88e302cf93a7f";
 
         const data = {
             location,
