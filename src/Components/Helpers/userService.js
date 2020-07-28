@@ -17,7 +17,7 @@ const userService = async (url, body, onSuccess, onFailure) => {
             onSuccess({
                 username: response.username,
                 id: response._id
-            })
+            });
         } else {
             onFailure()
         }

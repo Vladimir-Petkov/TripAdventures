@@ -137,13 +137,13 @@ form label{
 
 .single-trek-details{
   background-color:rgba(255, 255, 255, 0.849);
-   padding: 2%;
    margin:auto;
-   max-width: 80%;
+   max-width: 60%;
    border:solid;
    border-radius:1rem;
    border-color:rgb(241, 179, 6);
    box-shadow:0 0 1.5rem 0 rgba(0, 0, 0, 0.712);
+   height: 570px;
 }
 
 .infoType{

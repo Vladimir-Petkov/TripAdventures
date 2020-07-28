@@ -22,10 +22,21 @@ const trippsShema = new mongoose.Schema({
         required: true
     },
 
-    creator: [{
+    likes: {
+        type: mongoose.Schema.Types.Number,
+        min: 0,
+        required: true
+    },
+
+    creatorId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }]
+    }],
+
+    usernameCreator: {
+        type: mongoose.Schema.Types.String,
+        required: true
+    }
 });
 
 module.exports = new mongoose.model('Trips', trippsShema);

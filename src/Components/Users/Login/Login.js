@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import requester from '../../Helpers/userService';
+import userService from '../../Helpers/userService';
 import UserContext from '../../../Context';
 
 class Login extends Component {
@@ -52,7 +52,7 @@ class Login extends Component {
             return
         }
 
-        await requester('http://localhost:9999/api/user/login', {
+        await userService('http://localhost:9999/api/user/login', {
                 username,
                 password
             }, (user) => {

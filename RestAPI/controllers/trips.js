@@ -16,10 +16,10 @@ module.exports = {
     },
 
     post: (req, res, next) => {
-        const { location, date, description, image } = req.body;
-        const { _id } = req.user;
+        const { location, date, description, image, likes } = req.body;
+        const { _id, username } = req.user;
 
-        models.Trips.create({ location, date, description, image, creator: _id })
+        models.Trips.create({ location, date, description, image, likes, creatorId: _id, usernameCreator: username })
             .then((createdTrip) => {
                 return Promise.all([
                     models.User.updateOne({ _id }, { $push: { trips: createdTrip } }),

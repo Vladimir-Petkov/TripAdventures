@@ -11,7 +11,7 @@ router.post('/verify', controllers.user.post.verifyLogin);
 
 router.post('/logout', controllers.user.post.logout);
 
-router.put('/:id', controllers.user.put);
+router.get('/:id', controllers.user.get);
 
 router.delete('/:id', controllers.user.delete);
 
