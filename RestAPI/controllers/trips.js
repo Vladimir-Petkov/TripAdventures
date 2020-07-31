@@ -41,7 +41,8 @@ module.exports = {
     },
 
     delete: (req, res, next) => {
-        const id = req.params.id;
+        const { id } = req.params;
+
         models.Trips.deleteOne({ _id: id })
             .then((removedTrip) => res.send(removedTrip))
             .catch(next)

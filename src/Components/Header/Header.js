@@ -10,6 +10,7 @@ class Header extends Component {
 
     logout = () => {
         this.context.logOut();
+        this.props.history.push('/');
     };
 
     render() {

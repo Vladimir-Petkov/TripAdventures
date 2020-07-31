@@ -27,7 +27,7 @@ class CreateTrip extends Component {
     handleLocationBlur = () => {
         const { location } = this.state;
 
-        if (location.length < 3 || location.length > 12) {
+        if (location.length < 3 || location.length > 15) {
             this.setState({ locationError: true });
         } else {
             this.setState({ locationError: false });
@@ -101,7 +101,7 @@ class CreateTrip extends Component {
             </div>
 
             <div className="form-label-group">
-                {locationError ? <div style={mystyle} >Location must be between 3 and 12 characters long</div> : null}
+                {locationError ? <div style={mystyle} >Location must be between 3 and 15 characters long</div> : null}
                 <label htmlFor="inputTrekName">Location</label>
                 <input type="text" value={location} onChange={(e) => this.onChange(e, 'location')}
                     onBlur={this.handleLocationBlur} className="form-control" required />
