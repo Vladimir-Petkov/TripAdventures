@@ -10,6 +10,7 @@ class EditTrip extends Component {
             date: '',
             description: '',
             image: '',
+            likes: 0,
             locationError: false,
             descriptionError: false,
             imageError: false
@@ -30,7 +31,7 @@ class EditTrip extends Component {
     handleLocationBlur = () => {
         const { location } = this.state;
 
-        if (location.length < 3 || location.length > 12) {
+        if (location.length < 3 || location.length > 15) {
             this.setState({ locationError: true });
         } else {
             this.setState({ locationError: false });
@@ -78,14 +79,15 @@ class EditTrip extends Component {
                     location: trip.location,
                     date: trip.date,
                     description: trip.description,
-                    image: trip.image
+                    image: trip.image,
+                    likes: trip.likes
                 })
             });
     };
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        const { location, date, description, image, locationError, descriptionError, imageError } = this.state;
+        const { location, date, description, image, likes, locationError, descriptionError, imageError } = this.state;
 
         if (locationError || descriptionError || imageError) {
             return
@@ -99,6 +101,7 @@ class EditTrip extends Component {
             date,
             description,
             image,
+            likes,
             token
         };
 
@@ -130,7 +133,7 @@ class EditTrip extends Component {
             </div>
 
             <div className="form-label-group">
-                {locationError ? <div style={mystyle} >Location must be between 3 and 12 characters long</div> : null}
+                {locationError ? <div style={mystyle} >Location must be between 3 and 15 characters long</div> : null}
                 <label htmlFor="inputTrekName">Location</label>
                 <input type="text" value={location} onChange={(e) => this.onChange(e, 'location')}
                     onBlur={this.handleLocationBlur} className="form-control" required />
@@ -155,13 +158,9 @@ class EditTrip extends Component {
                 <input type="text" value={image} onChange={(e) => this.onChange(e, 'image')}
                     onBlur={this.handleImageBlur} className="form-control" required />
             </div>
-            {/* <div style={{ display: "none" }}>
-                <input name="organizer" value="" />
-                <input name="likes" value="" />
-            </div> */}
 
             <br />
-            <button className="btn btn-lg btn-dark btn-block" type="submit">Edit the trek</button>
+            <button className="btn btn-lg btn-dark btn-block" type="submit">Edit the trip</button>
         </form>
     }
 };

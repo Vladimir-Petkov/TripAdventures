@@ -21,7 +21,7 @@ class Profile extends Component {
         const response = await fetch(`http://localhost:9999/api/user?id=${id}`);
 
         if (!response.ok) {
-            this.props.history.push('/error')
+            this.props.history.push('/')
         };
 
         const user = await response.json();
@@ -40,11 +40,11 @@ class Profile extends Component {
 
         const trips = await response.json();
 
-        const tipArr = [];
+        const tripArr = [];
 
         trips.map((t) => {
             if (id === t.creatorId) {
-                tipArr.push(t);
+                tripArr.push(t);
             } else {
                 return null
             }
@@ -52,17 +52,21 @@ class Profile extends Component {
         });
 
         this.setState({
-            myTrips: tipArr,
-            myTripsLength: tipArr.length
+            myTrips: tripArr,
+            myTripsLength: tripArr.length
         });
     };
 
     renderTrips() {
         const { myTrips } = this.state;
 
-        return myTrips.map((trip) => {
-            return <p key={trip._id} >{trip.location}</p>
-        });
+        if (myTrips.length > 0) {
+            return myTrips.map((trip) => {
+                return <p key={trip._id} >{trip.location}</p>
+            });
+        } else {
+            return <p>No treks</p>
+        }
     };
 
     render() {
@@ -79,8 +83,9 @@ class Profile extends Component {
 
         return <div className="profile col-md-6 text-center col-lg">
             <img className="profile-img" src="/images/user.png" alt='' />
+            <br />
             <div className="profile-info">
-                <p>Username: <small>{username}</small></p>
+                <p>Username: <span>{username}</span></p>
                 <p className="infoType">Wished {myTripsLength} Trips</p>
 
                 {this.renderTrips()}

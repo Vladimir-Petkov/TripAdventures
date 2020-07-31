@@ -71,7 +71,6 @@ class DetailsTrip extends Component {
             body: JSON.stringify(data),
         }).then(res => res.json())
             .then((trip) => {
-                console.log(trip);
                 this.setState({
                     location: trip.location,
                     date: trip.date,
@@ -80,7 +79,7 @@ class DetailsTrip extends Component {
                     likes: trip.likes,
                     tripId: trip._id,
                     usernameCreator: trip.usernameCreator,
-                    creatorId: trip.creatorId[0]
+                    creatorId: trip.creatorId
                 })
             });
     };
@@ -128,7 +127,7 @@ class DetailsTrip extends Component {
                         </svg>
                   Edit the trip
                 </Link>
-                    <Link className="a-button" to="/">
+                    <Link className="a-button" to={`/delete/${tripId}`}>
                         <svg version="1.1" width="30px" id="remove-button" xmlns="http://www.w3.org/2000/svg"
                             x="0px" y="0px" viewBox="0 0 507.2 507.2"
                         >
