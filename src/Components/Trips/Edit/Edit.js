@@ -10,7 +10,10 @@ class EditTrip extends Component {
             date: '',
             description: '',
             image: '',
+            tripId: '',
             likes: 0,
+            creatorId: '',
+            usernameCreator: '',
             locationError: false,
             descriptionError: false,
             imageError: false
@@ -41,7 +44,7 @@ class EditTrip extends Component {
     handleDescriptionBlur = () => {
         const { description } = this.state;
 
-        if (description.length < 10 || description.length > 150) {
+        if (description.length < 10 || description.length > 400) {
             this.setState({ descriptionError: true });
         } else {
             this.setState({ descriptionError: false });
@@ -62,17 +65,12 @@ class EditTrip extends Component {
         const id = this.props.match.params.id;
         const token = getCookie('x-auth-token');
 
-        const data = {
-            id,
-            token
-        }
-
         await fetch(`http://localhost:9999/api/trips/${id}`, {
-            method: 'POST',
+            method: 'GET',
             headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data),
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
         }).then(res => res.json())
             .then((trip) => {
                 this.setState({
@@ -80,14 +78,17 @@ class EditTrip extends Component {
                     date: trip.date,
                     description: trip.description,
                     image: trip.image,
-                    likes: trip.likes
+                    likes: trip.likes,
+                    tripId: trip._id,
+                    usernameCreator: trip.usernameCreator,
+                    creatorId: trip.creatorId
                 })
             });
     };
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        const { location, date, description, image, likes, locationError, descriptionError, imageError } = this.state;
+        const { location, date, description, image, likes, usernameCreator, creatorId, locationError, descriptionError, imageError } = this.state;
 
         if (locationError || descriptionError || imageError) {
             return
@@ -97,22 +98,25 @@ class EditTrip extends Component {
         const token = getCookie('x-auth-token');
 
         const data = {
+            id,
             location,
             date,
             description,
             image,
             likes,
-            token
+            usernameCreator,
+            creatorId
         };
 
         await fetch(`http://localhost:9999/api/trips/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': token
             },
             body: JSON.stringify(data),
         }).then(res => res.json())
-            .then((r) => {
+            .then(() => {
                 this.props.history.push('/');
             });
     };
@@ -146,7 +150,7 @@ class EditTrip extends Component {
             </div>
 
             <div className="form-label-group">
-                {descriptionError ? <div style={mystyle} >Description must be between 10 and 150 characters long</div> : null}
+                {descriptionError ? <div style={mystyle} >Description must be between 10 and 400 characters long</div> : null}
                 <label htmlFor="inputTrekDescription">Description</label>
                 <textarea type="text" value={description} onChange={(e) => this.onChange(e, 'description')}
                     onBlur={this.handleDescriptionBlur} className="form-control" required ></textarea>

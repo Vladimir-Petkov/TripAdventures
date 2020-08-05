@@ -10,7 +10,7 @@ class DeleteTrip extends Component {
             date: '',
             description: '',
             image: '',
-            likes: 0,
+            likes: 0
         };
     };
 
@@ -22,17 +22,12 @@ class DeleteTrip extends Component {
         const id = this.props.match.params.id;
         const token = getCookie('x-auth-token');
 
-        const data = {
-            id,
-            token
-        }
-
         await fetch(`http://localhost:9999/api/trips/${id}`, {
-            method: 'POST',
+            method: 'GET',
             headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data),
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
         }).then(res => res.json())
             .then((trip) => {
                 this.setState({
@@ -47,26 +42,15 @@ class DeleteTrip extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        const { location, date, description, image, likes } = this.state;
-
         const id = this.props.match.params.id;
         const token = getCookie('x-auth-token');
-
-        const data = {
-            location,
-            date,
-            description,
-            image,
-            likes,
-            token
-        };
 
         await fetch(`http://localhost:9999/api/trips/${id}`, {
             method: 'DELETE',
             headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data),
+                'Content-type': 'application/json',
+                'Authorization': token
+            }
         }).then(res => res.json())
             .then(() => {
                 this.props.history.push('/');

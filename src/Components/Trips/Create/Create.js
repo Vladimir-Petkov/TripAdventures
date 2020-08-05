@@ -69,14 +69,14 @@ class CreateTrip extends Component {
             date,
             description,
             image,
-            likes,
-            token
+            likes
         };
 
         await fetch(`http://localhost:9999/api/trips`, {
             method: 'POST',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': token
             },
             body: JSON.stringify(data),
         }).then(res => res.json())

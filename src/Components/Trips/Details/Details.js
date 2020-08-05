@@ -13,10 +13,12 @@ class DetailsTrip extends Component {
             description: '',
             image: '',
             tripId: '',
+            likes: 0,
             creatorId: '',
             usernameCreator: '',
             currentUser: '',
-            isCreator: false,
+            id: this.props.match.params.id,
+            isCreator: false
         };
     };
 
@@ -43,32 +45,19 @@ class DetailsTrip extends Component {
                     isCreator: true
                 });
             };
-        } else if (creatorId !== currentUser.id) {
-            if (isCreator) {
-                this.setState({
-                    isCreator: false
-                });
-            } else {
-                return;
-            }
-        }
+        };
     };
 
     getTrip = async () => {
         const id = this.props.match.params.id;
         const token = getCookie('x-auth-token');
 
-        const data = {
-            id,
-            token
-        }
-
         await fetch(`http://localhost:9999/api/trips/${id}`, {
-            method: 'POST',
+            method: 'GET',
             headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data),
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
         }).then(res => res.json())
             .then((trip) => {
                 this.setState({
@@ -82,6 +71,42 @@ class DetailsTrip extends Component {
                     creatorId: trip.creatorId
                 })
             });
+    };
+
+    incrementLikes = async () => {
+        await this.setState({ likes: this.state.likes + 1 });
+
+        const { location, date, description, image, likes, usernameCreator, creatorId } = this.state;
+
+        const id = this.props.match.params.id;
+        const token = getCookie('x-auth-token');
+
+        const data = {
+            id, location, date, description, image, likes, usernameCreator, creatorId
+        };
+
+        await fetch(`http://localhost:9999/api/trips/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(data),
+        }).then(res => res.json())
+            .then((trip) => {
+                this.setState({
+                    location: trip.location,
+                    date: trip.date,
+                    description: trip.description,
+                    image: trip.image,
+                    likes: trip.likes,
+                    tripId: trip._id,
+                    usernameCreator: trip.usernameCreator,
+                    creatorId: trip.creatorId
+                });
+            });
+
+        this.getTrip();
     };
 
     render() {
@@ -104,6 +129,7 @@ class DetailsTrip extends Component {
                     </p>
                 </div>
 
+                <br />
                 {isCreator ? <div className="buttons-together">
                     <Link className="a-button" to={`/edit/${tripId}`}>
                         <svg version="1.1" id="edit-button" width="30px" xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +169,7 @@ class DetailsTrip extends Component {
                         </svg>
                   Delete the trip
                 </Link>
-                </div > : <Link className="a-button" to="/">
+                </div > : <Link className="a-button" to={`/details/${tripId}`} onClick={this.incrementLikes}>
                         <svg version="1.1" width="30px" id="like-button" xmlns="http://www.w3.org/2000/svg"
                             x="0px" y="0px" viewBox="0 0 50 50"
                         >
