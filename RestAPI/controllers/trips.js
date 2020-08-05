@@ -8,7 +8,7 @@ module.exports = {
     },
 
     getOne: function (req, res, next) {
-        const { id } = req.body;
+        const { id } = req.params;
 
         models.Trips.findById(id)
             .then((trips) => res.send(trips))
@@ -33,9 +33,9 @@ module.exports = {
     },
 
     put: (req, res, next) => {
-        const { location, date, description, image, id } = req.body;
+        const { location, date, description, image, likes, usernameCreator, creatorId, id } = req.body;
 
-        models.Trips.updateOne({ id: id }, { location, date, description, image })
+        models.Trips.findByIdAndUpdate(id, { location, date, description, image, likes, usernameCreator, creatorId })
             .then((updatedTrip) => res.send(updatedTrip))
             .catch(next)
     },

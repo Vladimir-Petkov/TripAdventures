@@ -36,16 +36,15 @@ class AuthHelper extends Component {
         };
 
         fetch('http://localhost:9999/api/user/verify', {
-            method: 'POST',
-            body: JSON.stringify({
-                token
-            }),
+            method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': token
             }
         }).then(promise => {
             return promise.json();
         }).then(response => {
+            console.log(response);
             if (response.status) {
                 this.logIn({
                     username: response.user.username,

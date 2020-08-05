@@ -26,7 +26,7 @@ module.exports = {
         },
 
         verifyLogin: (req, res, next) => {
-            const token = req.body.token || '';
+            const token = req.headers.authorization || '';
 
             Promise.all([
                 utils.jwt.verifyToken(token),
