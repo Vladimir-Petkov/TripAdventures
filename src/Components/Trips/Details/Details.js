@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import UserContext from '../../../Context';
 
 class DetailsTrip extends Component {
@@ -185,4 +185,4 @@ class DetailsTrip extends Component {
     }
 };
 
-export default DetailsTrip;
+export default withRouter(DetailsTrip);

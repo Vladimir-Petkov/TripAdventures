@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router";
 
 class Profile extends Component {
     constructor(props) {
@@ -12,8 +13,8 @@ class Profile extends Component {
     };
 
     componentDidMount() {
-        this.getUser(this.props.match.params.userid);
-        this.myTrips(this.props.match.params.userid);
+        this.getUser(this.props.match.params.id);
+        this.myTrips(this.props.match.params.id);
         this.renderTrips();
     };
 
@@ -94,4 +95,4 @@ class Profile extends Component {
     }
 };
 
-export default Profile;
+export default withRouter(Profile);
