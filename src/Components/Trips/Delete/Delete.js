@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
+import { withRouter } from "react-router";
 
 class DeleteTrip extends Component {
     constructor() {
@@ -92,4 +93,4 @@ class DeleteTrip extends Component {
     }
 };
 
-export default DeleteTrip;
+export default withRouter(DeleteTrip);

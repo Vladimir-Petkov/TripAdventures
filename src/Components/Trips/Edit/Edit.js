@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
+import { withRouter } from "react-router";
 
 class EditTrip extends Component {
     constructor() {
@@ -169,4 +170,4 @@ class EditTrip extends Component {
     }
 };
 
-export default EditTrip;
+export default withRouter(EditTrip);

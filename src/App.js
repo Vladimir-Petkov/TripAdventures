@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Home from './Components/Home/Home';
@@ -12,23 +12,42 @@ import DetailsTrip from './Components/Trips/Details/Details';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
+import UserContext from './Context';
 
-const App = () => {
+const App = (props) => {
+  const context = useContext(UserContext);
+  const loggedIn = context.loggedIn;
+
   return (
     <div>
       <Router>
         <Header />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/profile/:userid" component={Profile} />
-          <Route path="/create" component={CreateTrip} />
-          <Route path="/edit/:id" component={EditTrip} />
-          <Route path="/delete/:id" component={DeleteTrip} />
-          <Route path="/details/:id" component={DetailsTrip} />
+          <Route path="/register">
+            {!loggedIn ? (<Register />) : (<Redirect to="/" />)}
+          </Route>
+          <Route path="/login">
+            {!loggedIn ? (<Login />) : (<Redirect to="/" />)}
+          </Route>
+          <Route path="/profile/:id">
+            {loggedIn ? (<Profile />) : (<Redirect to="/login" />)}
+          </Route>
+          <Route path="/create">
+            {loggedIn ? (<CreateTrip />) : (<Redirect to="/login" />)}
+          </Route>
+          <Route path="/edit/:id">
+            {loggedIn ? (<EditTrip />) : (<Redirect to="/login" />)}
+          </Route>
+          <Route path="/delete/:id">
+            {loggedIn ? (<DeleteTrip />) : (<Redirect to="/login" />)}
+          </Route>
+          <Route path="/details/:id">
+            {loggedIn ? (<DetailsTrip />) : (<Redirect to="/login" />)}
+          </Route>
         </Switch>
         <Footer />
       </Router>
