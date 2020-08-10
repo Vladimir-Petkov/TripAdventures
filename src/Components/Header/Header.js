@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 // import 'Header.module.css';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { Link, useHistory } from "react-router-dom";
 import UserContext from '../../Context';
 
-class Header extends Component {
+const Header = () => {
+    const context = useContext(UserContext);
+    const history = useHistory();
 
-    static contextType = UserContext;
-
-    logout = () => {
-        this.context.logOut();
-        this.props.history.push('/');
+    const logout = () => {
+        context.logOut();
+        history.push('/login');
     };
 
-    render() {
-        const { loggedIn, user } = this.context;
+    const { loggedIn, user } = context;
 
-        return <nav className="site-header sticky-top py-1">
+    return (
+        < nav className="site-header sticky-top py-1" >
             <div className="container d-flex flex-column flex-md-row justify-content-between">
                 <Link className="py-3" to="/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="none" stroke="currentColor"
@@ -32,12 +31,12 @@ class Header extends Component {
 
                 {loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/create">Create Trip</Link>}
                 {loggedIn && <Link className="py-3 d-none d-md-inline-block" to={`/profile/${user.id}`}>Hello, {user.username}</Link>}
-                {loggedIn && <a className="py-3 d-none d-md-inline-block" href="/" onClick={this.logout}>Logout</a>}
+                {loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/login" onClick={logout}>Logout</Link>}
                 {!loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/login">Login</Link>}
                 {!loggedIn && <Link className="py-3 d-none d-md-inline-block" to="/register" >Register</Link>}
             </div>
-        </nav>
-    }
+        </nav >
+    )
 };
 
-export default withRouter(Header);
+export default Header;
