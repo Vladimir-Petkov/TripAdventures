@@ -44,7 +44,6 @@ class AuthHelper extends Component {
         }).then(promise => {
             return promise.json();
         }).then(response => {
-            console.log(response);
             if (response.status) {
                 this.logIn({
                     username: response.user.username,
