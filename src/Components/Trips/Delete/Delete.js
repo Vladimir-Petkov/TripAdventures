@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
 import { withRouter } from "react-router";
+import { toast } from 'react-toastify';
 
 class DeleteTrip extends Component {
     constructor() {
@@ -54,6 +55,7 @@ class DeleteTrip extends Component {
             }
         }).then(res => res.json())
             .then(() => {
+                toast.success(`Successfully Delete Trip with Title: ${this.state.location}`);
                 this.props.history.push('/');
             });
     };

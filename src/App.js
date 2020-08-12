@@ -17,6 +17,8 @@ import {
 } from "react-router-dom";
 import UserContext from './Context';
 import ErrorPage from './Components/Error/Error';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = (props) => {
   const context = useContext(UserContext);
@@ -26,6 +28,8 @@ const App = (props) => {
     <div>
       <Router>
         <Header />
+        <ToastContainer position="top-right"
+          autoClose={3000} />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/register">

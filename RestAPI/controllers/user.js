@@ -20,8 +20,8 @@ module.exports = {
                     res.header("Authorization", token).send(createdUser);
                 })
                 .catch((err) => {
-
-                    console.log(err)
+                    console.log(err);
+                    next(err);
                 })
         },
 

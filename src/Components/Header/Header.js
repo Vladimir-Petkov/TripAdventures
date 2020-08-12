@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 // import 'Header.module.css';
 import { Link, useHistory } from "react-router-dom";
 import UserContext from '../../Context';
+import { toast } from 'react-toastify';
 
 const Header = () => {
     const context = useContext(UserContext);
@@ -9,6 +10,7 @@ const Header = () => {
 
     const logout = () => {
         context.logOut();
+        toast.success('Successfully Logout');
         history.push('/login');
     };
 
