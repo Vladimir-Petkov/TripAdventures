@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router";
 import userService from '../../Helpers/userService';
 import UserContext from '../../../Context';
 
@@ -122,4 +123,4 @@ class Register extends Component {
     }
 };
 
-export default Register;
+export default withRouter(Register);

@@ -191,7 +191,6 @@ nav {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.411); 
-   /* border */
   background: rgb(246, 217, 154);
   box-shadow: 0 0 10rem 0 rgba(0, 0, 0, 0.712);
 }
@@ -211,7 +210,6 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
 
 .profile-img{

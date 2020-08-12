@@ -16,6 +16,7 @@ import {
   Redirect
 } from "react-router-dom";
 import UserContext from './Context';
+import ErrorPage from './Components/Error/Error';
 
 const App = (props) => {
   const context = useContext(UserContext);
@@ -48,6 +49,7 @@ const App = (props) => {
           <Route path="/details/:id">
             {loggedIn ? (<DetailsTrip />) : (<Redirect to="/login" />)}
           </Route>
+          <Route path='*' component={ErrorPage} />
         </Switch>
         <Footer />
       </Router>
