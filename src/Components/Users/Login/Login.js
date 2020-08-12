@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router";
 import userService from '../../Helpers/userService';
 import UserContext from '../../../Context';
 
@@ -59,7 +60,10 @@ class Login extends Component {
                 this.context.logIn(user);
                 this.props.history.push('/');
             }, (e) => {
-                console.log('Error', e);
+                this.setState({
+                    username: '',
+                    password: ''
+                })
             }
         )
     };
@@ -104,4 +108,4 @@ class Login extends Component {
     }
 };
 
-export default Login;
+export default withRouter(Login);
