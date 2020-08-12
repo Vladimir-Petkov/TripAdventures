@@ -70,7 +70,6 @@ a.trek-details:hover{
 
 form,.profile,.home{
     background-color:rgba(255, 255, 255, 0.479);
-    padding:2%;
     width: 80%;
     margin: 0 auto;
     margin-top:2%;
@@ -141,7 +140,7 @@ form label{
 .single-trek-details{
   background-color:rgba(255, 255, 255, 0.849);
    margin:auto;
-   max-width: 60%;
+   max-width: 50%;
    border:solid;
    border-radius:1rem;
    border-color:rgb(241, 179, 6);
@@ -249,8 +248,7 @@ img {
   background-position: center; 
   background-repeat: no-repeat; 
   background-size: cover; 
-  border-radius:15px;
-  padding:2rem;
+  border-radius:10px;
   box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.712);
 }
 

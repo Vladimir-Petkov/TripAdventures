@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from "react-router";
 import userService from '../../Helpers/userService';
 import UserContext from '../../../Context';
+import { toast } from 'react-toastify';
 
 class Login extends Component {
     constructor() {
@@ -58,14 +59,16 @@ class Login extends Component {
                 password
             }, (user) => {
                 this.context.logIn(user);
+                toast.success('Successfully Logged In');
                 this.props.history.push('/');
             }, (e) => {
+                toast.error('Wrong username or password, please try again later');
                 this.setState({
                     username: '',
                     password: ''
-                })
+                });
             }
-        )
+        );
     };
 
     render() {

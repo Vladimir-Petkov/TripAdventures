@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from "react-router";
 import userService from '../../Helpers/userService';
 import UserContext from '../../../Context';
+import { toast } from 'react-toastify';
 
 class Register extends Component {
     constructor() {
@@ -69,9 +70,15 @@ class Register extends Component {
             password
           }, (user) => {
             this.context.logIn(user);
+            toast.success('Successfully Registered');
             this.props.history.push('/');
           }, (e) => {
-            console.log('Error', e);
+            toast.error('Username is already registered');
+                this.setState({
+                    username: '',
+                    password: '',
+                    rePassword: ''
+                });
           }
         )
     };

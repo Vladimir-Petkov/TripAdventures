@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
 import { Link, withRouter } from 'react-router-dom';
 import UserContext from '../../../Context';
+import { toast } from 'react-toastify';
 
 class DetailsTrip extends Component {
     constructor(props) {
@@ -94,6 +95,7 @@ class DetailsTrip extends Component {
             body: JSON.stringify(data),
         }).then(res => res.json())
             .then((trip) => {
+                toast.success(`Successfully Like a Trip with Title: ${trip.location}`);
                 this.setState({
                     location: trip.location,
                     date: trip.date,
@@ -129,7 +131,6 @@ class DetailsTrip extends Component {
                     </p>
                 </div>
 
-                <br />
                 {isCreator ? <div className="buttons-together">
                     <Link className="a-button" to={`/edit/${tripId}`}>
                         <svg version="1.1" id="edit-button" width="30px" xmlns="http://www.w3.org/2000/svg"

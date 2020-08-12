@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import getCookie from '../../Helpers/getCookie';
 import { withRouter } from "react-router";
+import { toast } from 'react-toastify';
 
 class EditTrip extends Component {
     constructor() {
@@ -118,6 +119,7 @@ class EditTrip extends Component {
             body: JSON.stringify(data),
         }).then(res => res.json())
             .then(() => {
+                toast.success(`Successfully Edit Trip with Title: ${location}`);
                 this.props.history.push('/');
             });
     };
