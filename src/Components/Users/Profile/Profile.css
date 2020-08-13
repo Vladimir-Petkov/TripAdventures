@@ -1,0 +1,13 @@
+.profile-img {
+    margin: 0 auto;
+    width: 150px;
+    height: auto;
+    position: static;
+    top: 0;
+    left: 0;
+    transform: none;
+}
+
+.profile-info {
+    padding: 0;
+}

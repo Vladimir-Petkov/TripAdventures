@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-// import 'Header.module.css';
+import './Header.css';
 import { Link, useHistory } from "react-router-dom";
 import UserContext from '../../Context';
 import { toast } from 'react-toastify';

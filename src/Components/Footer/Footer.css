@@ -1,0 +1,6 @@
+.footer {
+    color: rgba(255, 255, 255, 0.513);
+    bottom: 0;
+    padding-top: 15px;
+    position: fixed;
+}

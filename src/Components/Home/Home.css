@@ -1,0 +1,51 @@
+.home {
+    background-color: rgba(255, 255, 255, 0.781);
+    max-width: 90%;
+}
+
+.no-found-picture, .home-picture {
+    top: 0;
+    left: 0;
+    transform: none;
+    position: static;
+}
+
+#fouronefour {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.no-found-template {
+    margin: 0 auto;
+    text-align: center;
+    color: whitesmoke;
+}
+
+#treks-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.treksPlaceholder {
+    background-color: rgba(255, 255, 255, 0.849);
+    flex: 0 1 30%;
+    margin: 2%;
+    max-width: 25%;
+    border: solid;
+    border-color: rgb(241, 179, 6);
+    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.712);
+}
+
+.card-image {
+    max-height: 60%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.card-text {
+    top: 10px;
+}

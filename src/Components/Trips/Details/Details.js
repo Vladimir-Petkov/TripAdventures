@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Details.css';
 import getCookie from '../../Helpers/getCookie';
 import { Link, withRouter } from 'react-router-dom';
 import UserContext from '../../../Context';
@@ -116,7 +117,6 @@ class DetailsTrip extends Component {
 
         return <div className="single-trek-details text-center">
             <div className="col-md-12 text-center overflow-hidden">
-                <br />
                 <img className="details-img"
                     src={image} alt="" />
                 <div className="overflow-hidden">

@@ -1,0 +1,56 @@
+.trek-details {
+    display: block;
+    color: rgb(0, 0, 0);
+    width: 25%;
+    margin: 1.5rem auto 48px auto;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 18px;
+    padding: 0.5rem 0;
+    font-weight: bold;
+}
+
+.a-button {
+    color: rgb(46, 45, 45);
+    padding: 10px;
+    transition: ease-in-out color .15s;
+}
+
+.a-button:hover {
+    color: rgb(78, 58, 2);
+    text-decoration: none;
+}
+
+.single-trek-details {
+    background-color: rgba(255, 255, 255, 0.849);
+    margin: auto;
+    max-width: 50%;
+    border: solid;
+    border-radius: 1rem;
+    border-color: rgb(241, 179, 6);
+    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.712);
+    height: 570px;
+}
+
+a.trek-details:hover {
+    text-decoration: none;
+    background: #333;
+    color: white;
+    border: 2px solid #333;
+}
+
+.buttons-together {
+    margin: auto;
+    margin-top: 2%;
+}
+
+.details-img {
+    width: 40%;
+    height: auto;
+    margin: 0 auto;
+    position: static;
+    top: 0;
+    left: 0;
+    transform: none;
+    border: 1px solid black;
+}

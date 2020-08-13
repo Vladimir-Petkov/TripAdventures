@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Create.css';
 import getCookie from '../../Helpers/getCookie';
 import { withRouter } from "react-router";
 import { toast } from 'react-toastify';
