@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import './Home.css';
 import UserContext from '../../Context';
 import GuestPage from './Guest/GuestPage';
 import AuthPageWithTrips from './Auth/AuthPageWithTrips';
-// import 'Header.module.css';
 
 class Home extends Component {
     constructor() {

@@ -24,11 +24,17 @@ class AuthPageWithTrips extends Component {
     renderTrips() {
         const { trips } = this.state;
 
-        return trips.map((trip, index) => {
-            return (
-                <SingleTrip key={trip._id} {...trip} />
-            )
-        });
+        if (trips) {
+            return trips.map((trip, index) => {
+                return (
+                    <SingleTrip key={trip._id} {...trip} />
+                )
+            });
+        } else {
+            return (<div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>)
+        }
     };
 
     componentDidMount() {
@@ -46,15 +52,7 @@ class AuthPageWithTrips extends Component {
                     haveTrips: true
                 });
             }
-        } else if (trips.length === 0) {
-            if (haveTrips) {
-                this.setState({
-                    haveTrips: false
-                });
-            } else {
-                return
-            }
-        }
+        };
     };
 
     render() {

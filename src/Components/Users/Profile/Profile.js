@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Profile.css';
 import { withRouter } from "react-router";
 
 class Profile extends Component {
@@ -66,7 +67,7 @@ class Profile extends Component {
                 return <p key={trip._id} >{trip.location}</p>
             });
         } else {
-            return <p>No treks</p>
+            return <p>No Trips Created</p>
         }
     };
 
