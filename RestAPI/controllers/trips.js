@@ -2,7 +2,7 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-        models.Trips.find().populate('creator')
+        models.Trips.find().sort('-likes').populate('creator')
             .then((trips) => res.send(trips))
             .catch(next);
     },

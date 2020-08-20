@@ -2,7 +2,6 @@
     display: block;
     color: rgb(0, 0, 0);
     width: 25%;
-    margin: 1.5rem auto 48px auto;
     text-align: center;
     border-radius: 15px;
     font-size: 18px;
@@ -53,4 +52,8 @@ a.trek-details:hover {
     left: 0;
     transform: none;
     border: 1px solid black;
+}
+
+#mySpan {
+    color: darkgreen;
 }

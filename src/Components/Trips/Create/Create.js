@@ -13,7 +13,7 @@ class CreateTrip extends Component {
             date: '',
             description: '',
             image: '',
-            likes: 0,
+            likes: [],
             locationError: false,
             descriptionError: false,
             imageError: false
