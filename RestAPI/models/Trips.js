@@ -23,8 +23,7 @@ const trippsShema = new mongoose.Schema({
     },
 
     likes: {
-        type: mongoose.Schema.Types.Number,
-        min: 0,
+        type: mongoose.Schema.Types.Array,
         required: true
     },
 

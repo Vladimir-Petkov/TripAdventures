@@ -13,7 +13,7 @@ class EditTrip extends Component {
             description: '',
             image: '',
             tripId: '',
-            likes: 0,
+            likes: [],
             creatorId: '',
             usernameCreator: '',
             locationError: false,
