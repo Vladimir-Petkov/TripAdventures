@@ -1,2 +1,3 @@
-install the dependencies with npm install
-run the client in a development mode with npm start
+Install the dependencies with npm install
+
+Run the client in a development mode with npm start
