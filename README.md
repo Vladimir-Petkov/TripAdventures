@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## The technologies
 
-## Available Scripts
+This application is built with [MongoDB](https://www.mongodb.com), [Express.js](https://expressjs.com), [React.js](https://reactjs.org) and [Node.js](https://nodejs.org/en/) - also known as the **MERN** stack.
 
-In the project directory, you can run:
+## The application
 
-### `npm start`
+### Idea
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**TripAdventures** is a online travel agency. It provides a way to allow customers to create and like trips. Once you gather more like-minded people, we can organize your dream trip.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Design
 
-### `npm test`
+The app is fully responsible built with css grid, flexbox and media queries, using mobile first web design. Layout looks good on mobile phones, tablets and laptops / desktops. The app has good ui and great ux!
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Endpoints
 
-### `npm run build`
+#### Users
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* GET
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    * `/profile`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* POST
 
-### `npm run eject`
+    * `/register`
+    
+    * `/login`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    * `/logout`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Trips
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* GET
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    * `/`
 
-## Learn More
+    * `/details/:id`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* POST
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    * `/create`
 
-### Code Splitting
+* PUT
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+    * `/edit/:id`
+    
+    * `/like/:id`
 
-### Analyzing the Bundle Size
+* DELETE
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+    * `/delete/:id`
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Functionalities
 
-### Advanced Configuration
+#### Guests (not logged in) are allowed to 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+* _register_
 
-### Deployment
+* _login_
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+* _view guest home page_
 
-### `npm run build` fails to minify
+#### Users (logged in) are allowed to 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* _logout_
+
+* _view all trips_
+
+* _view their profile page with own trips_
+
+* _create trip_
+
+* _edit their trip / those which they created_
+
+* _delete their trip / those which they created_
+
+* _like a trip / those which they are not created_
