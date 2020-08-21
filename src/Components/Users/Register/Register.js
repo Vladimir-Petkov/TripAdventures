@@ -1,133 +1,108 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { withRouter } from "react-router";
 import userService from '../../Helpers/userService';
 import UserContext from '../../../Context';
 import { toast } from 'react-toastify';
 
-class Register extends Component {
-    constructor() {
-        super();
+const Register = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [rePassword, setrePassword] = useState('');
+    const [usernameError, setusernameError] = useState(false);
+    const [passwordError, setpasswordError] = useState(false);
+    const [rePasswordError, setrePasswordError] = useState(false);
+    const context = useContext(UserContext);
+    const history = useHistory();
 
-        this.state = {
-            username: '',
-            password: '',
-            rePassword: '',
-            usernameError: false,
-            passwordError: false,
-            rePasswordError: false
+    const handleUsernameBlur = () => {
+        if (username.length < 4 || username.length > 8) {
+            setusernameError(true);
+        } else {
+            setusernameError(false);
         };
     };
-    static contextType = UserContext;
 
-    onChange = (event, type) => {
-        const newState = {};
-        newState[type] = event.target.value;
-
-        this.setState(newState);
-    };
-
-    handleUsernameBlur = () => {
-        const { username } = this.state;
-
-        if (username.length < 4 || username.length > 8) {
-            this.setState({ usernameError: true });
-        } else {
-            this.setState({ usernameError: false });
-        }
-    };
-
-    handlePasswordBlur = () => {
-        const { password } = this.state;
-
+    const handlePasswordBlur = () => {
         if (password.length < 5 || password.length > 16) {
-            this.setState({ passwordError: true });
+            setpasswordError(true);
         } else {
-            this.setState({ passwordError: false });
-        }
+            setpasswordError(false);
+        };
     };
 
-    handleRepasswordBlur = () => {
-        const { password, rePassword } = this.state;
-
+    const handleRepasswordBlur = () => {
         if (password !== rePassword) {
-            this.setState({ rePasswordError: true });
+            setrePasswordError(true);
         } else {
-            this.setState({ rePasswordError: false });
-        }
+            setrePasswordError(false);
+        };
     };
 
-    handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const { username, password, usernameError, passwordError, rePasswordError } = this.state;
 
         if (usernameError || passwordError || rePasswordError) {
             return
         }
-    
+
         await userService('http://localhost:9999/api/user/register', {
             username,
             password
-          }, (user) => {
-            this.context.logIn(user);
+        }, (user) => {
+            context.logIn(user);
             toast.success('Successfully Registered');
-            this.props.history.push('/');
-          }, (e) => {
+            history.push('/');
+        }, (e) => {
             toast.error('Username is already registered');
-                this.setState({
-                    username: '',
-                    password: '',
-                    rePassword: ''
-                });
-          }
+            setUsername('');
+            setPassword('');
+            setrePassword('');
+        }
         )
     };
 
-    render() {
-        const { username, password, rePassword, usernameError, passwordError, rePasswordError } = this.state;
+    const mystyle = {
+        textAlign: 'center',
+        color: "red"
+    };
 
-        const mystyle = {
-            textAlign: 'center',
-            color: "red"
-        };
+    return <form onSubmit={handleSubmit} method="POST">
+        <div className="text-center mb-4">
+            <h1 className="h3 mb-3 font-weight-normal">Register</h1>
+            <p>Join our family and make a wish!</p>
+        </div>
 
-        return <form onSubmit={this.handleSubmit} method="POST">
-            <div className="text-center mb-4">
-                <h1 className="h3 mb-3 font-weight-normal">Register</h1>
-                <p>Join our family and make a wish!</p>
-            </div>
+        <div className="form-label-group">
+            {usernameError ? <div style={mystyle} >Username must be between 4 and 8 characters long</div> : null}
+            <label htmlFor="inputUsername">Username</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
+                onBlur={handleUsernameBlur} className="form-control" required />
+        </div>
 
-            <div className="form-label-group">
-                {usernameError ? <div style={mystyle} >Username must be between 4 and 8 characters long</div> : null}
-                <label htmlFor="inputUsername">Username</label>
-                <input type="text" value={username} onChange={(e) => this.onChange(e, 'username')}
-                    onBlur={this.handleUsernameBlur} className="form-control" required />
-            </div>
+        <div className="form-label-group">
+            {passwordError ? <div style={mystyle} >Password must be between 5 and 16 characters long</div> : null}
+            <label htmlFor="inputPassword">Password</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} onBlur={handlePasswordBlur} className="form-control" required />
+        </div>
 
-            <div className="form-label-group">
-                {passwordError ? <div style={mystyle} >Password must be between 5 and 16 characters long</div> : null}
-                <label htmlFor="inputPassword">Password</label>
-                <input type="password" value={password} onChange={(e) => this.onChange(e, 'password')} onBlur={this.handlePasswordBlur} className="form-control" required />
-            </div>
+        <div className="form-label-group">
+            {rePasswordError ? <div style={mystyle} >Repeat Password does not match password!</div> : null}
+            <label htmlFor="inputRePassword">Re-Password</label>
+            <input type="password" value={rePassword} onChange={(e) => setrePassword(e.target.value)} onBlur={handleRepasswordBlur} className="form-control" required />
+        </div>
 
-            <div className="form-label-group">
-                {rePasswordError ? <div style={mystyle} >Repeat Password does not match password!</div> : null}
-                <label htmlFor="inputRePassword">Re-Password</label>
-                <input type="password" value={rePassword} onChange={(e) => this.onChange(e, 'rePassword')} onBlur={this.handleRepasswordBlur} className="form-control" required />
-            </div>
+        <br />
+        <button className="btn btn-lg btn-dark btn-block" type="submit">Register</button>
 
-            <br />
-            <button className="btn btn-lg btn-dark btn-block" type="submit">Register</button>
+        <div className="text-center mb-4">
+            <p className="alreadyUser"> Already have account? Then just login
+            <Link to="/login"> Here</Link>!
+        </p>
+        </div>
 
-            <div className="text-center mb-4">
-                <p className="alreadyUser"> Already have account? Then just login
-                <Link to="/login"> Here</Link>!
-            </p>
-            </div>
-
-            <p className="mt-5 mb-3 text-muted text-center">© TripAdventures - 2020.</p>
-        </form>
-    }
+        <p className="mt-5 mb-3 text-muted text-center">© TripAdventures - 2020.</p>
+    </form>
 };
 
 export default withRouter(Register);
