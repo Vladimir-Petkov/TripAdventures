@@ -1,67 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import './Profile.css';
 import { withRouter } from "react-router";
 
-class Profile extends Component {
-    constructor(props) {
-        super(props);
+const Profile = () => {
+    const [username, setUsername] = useState([]);
+    const [myTrips, setmyTrips] = useState([]);
+    const [myTripsLength, setmyTripsLength] = useState(0);
+    const params = useParams();
+    const history = useHistory();
 
-        this.state = {
-            username: null,
-            myTrips: [],
-            myTripsLength: 0
-        };
-    };
-
-    componentDidMount() {
-        this.getUser(this.props.match.params.id);
-        this.myTrips(this.props.match.params.id);
-        this.renderTrips();
-    };
-
-    getUser = async (id) => {
+    const getUser = useCallback(async () => {
+        const id = params.id;
         const response = await fetch(`http://localhost:9999/api/user?id=${id}`);
 
         if (!response.ok) {
-            this.props.history.push('/')
+            history.push('/')
         };
 
         const user = await response.json();
 
-        this.setState({
-            username: user.username
-        });
-    };
+        setUsername(user.username);
+    }, [params.id, history]);
 
-    myTrips = async (id) => {
+    const getMyTrips = useCallback(async () => {
+        const id = params.id;
         const response = await fetch(`http://localhost:9999/api/trips`);
 
         if (!response.ok) {
-            this.props.history.push('/')
+            history.push('/')
         };
 
         const trips = await response.json();
 
-        const tripArr = [];
+        const myTripsArray = [];
 
         trips.map((t) => {
             if (id === t.creatorId) {
-                tripArr.push(t);
+                myTripsArray.push(t);
             } else {
                 return null
             }
             return t;
         });
 
-        this.setState({
-            myTrips: tripArr,
-            myTripsLength: tripArr.length
-        });
-    };
+        setmyTrips(myTripsArray);
+        setmyTripsLength(myTripsArray.length);
+    }, [params.id, history]);
 
-    renderTrips() {
-        const { myTrips } = this.state;
-
+    const renderTrips = () => {
         if (myTrips.length > 0) {
             return myTrips.map((trip) => {
                 return <p key={trip._id} >{trip.location}</p>
@@ -71,29 +58,21 @@ class Profile extends Component {
         }
     };
 
-    render() {
-        const {
-            username,
-            myTripsLength
-        } = this.state;
+    useEffect(() => {
+        getUser();
+        getMyTrips();
+    }, [getUser, getMyTrips]);
 
-        if (username === null) {
-            return (<div className="spinner-border" role="status">
-                <span className="sr-only">Loading...</span>
-            </div>)
-        };
+    return <div className="profile col-md-6 text-center col-lg">
+        <img className="profile-img" src="/images/user.png" alt='' />
+        <br />
+        <div className="profile-info">
+            <p>Username: <span>{username}</span></p>
+            <p className="infoType">Wished {myTripsLength} Trips</p>
 
-        return <div className="profile col-md-6 text-center col-lg">
-            <img className="profile-img" src="/images/user.png" alt='' />
-            <br />
-            <div className="profile-info">
-                <p>Username: <span>{username}</span></p>
-                <p className="infoType">Wished {myTripsLength} Trips</p>
-
-                {this.renderTrips()}
-            </div>
+            {renderTrips()}
         </div>
-    }
+    </div>
 };
 
 export default withRouter(Profile);

@@ -15,7 +15,6 @@ module.exports = {
             
             models.User.create({ username, password })
                 .then((createdUser) => {
-                    console.log(createdUser)
                     const token = utils.jwt.createToken({ id: createdUser._id });
                     res.header("Authorization", token).send(createdUser);
                 })
@@ -57,6 +56,7 @@ module.exports = {
 
         login: (req, res, next) => {
             const { username, password } = req.body;
+
             models.User.findOne({ username })
                 .then((user) => Promise.all([user, user.matchPassword(password)]))
                 .then(([user, match]) => {
@@ -76,6 +76,7 @@ module.exports = {
             console.log('-'.repeat(100));
             console.log(token);
             console.log('-'.repeat(100));
+
             models.TokenBlacklist.create({ token })
                 .then(() => {
                     res.clearCookie(config.authCookieName).send('Logout successfully!');
@@ -87,6 +88,7 @@ module.exports = {
     put: (req, res, next) => {
         const id = req.params.id;
         const { username, password } = req.body;
+
         models.User.update({ _id: id }, { username, password })
             .then((updatedUser) => res.send(updatedUser))
             .catch(next)
@@ -94,6 +96,7 @@ module.exports = {
 
     delete: (req, res, next) => {
         const id = req.params.id;
+
         models.User.deleteOne({ _id: id })
             .then((removedUser) => res.send(removedUser))
             .catch(next)
