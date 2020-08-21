@@ -10,7 +10,7 @@ This application is built with [MongoDB](https://www.mongodb.com), [Express.js](
 
 ### Design
 
-The app is fully responsible built with css grid, flexbox and media queries, using mobile first web design. Layout looks good on mobile phones, tablets and laptops / desktops. The app has good ui and great ux!
+Layout looks good on laptops / desktops. The app has good ui and great ux!
 
 ### Endpoints
 
